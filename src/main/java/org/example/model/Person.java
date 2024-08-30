@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,7 +19,9 @@ public class Person {
     @Column(name = "age")
     private int age;
 
+//    @OneToMany(mappedBy = "owner",cascade = CascadeType.PERSIST) // чтобы использовать метод persist
     @OneToMany(mappedBy = "owner")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE) // чтобы использовать save c каскадированием
     private List<Item> items;
 
     public Person() {

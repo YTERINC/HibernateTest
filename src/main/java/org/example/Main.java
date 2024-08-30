@@ -20,11 +20,9 @@ public class Main {
             session.beginTransaction();
 
             Person person = new Person("Test cascading", 30);
-            Item item = new Item("Test cascading item", person);
-            person.setItems(new ArrayList<>(Collections.singletonList(item)));
-
-//            session.persist(person); // используем persist вместо save, persist есть у всех JPA провайдеров, save - у Hibernate
-            //session.persist(item) - тоже выполнляется, но скрытно для нас
+            person.addItem(new Item("Item 1"));
+            person.addItem(new Item("Item 2"));
+            person.addItem(new Item("Item 3"));
 
             session.save(person); // теперь с каскадированием
             session.getTransaction().commit();

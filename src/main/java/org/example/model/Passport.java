@@ -5,8 +5,12 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "Passport")
-public class Passport implements Serializable { // Serializable - нужен, если первичный ключ не числовой
+public class Passport { // Serializable - нужен, если первичный ключ не числовой
     @Id
+    @JoinColumn(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @OneToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
@@ -37,4 +41,11 @@ public class Passport implements Serializable { // Serializable - нужен, е
         this.passportNumber = passportNumber;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

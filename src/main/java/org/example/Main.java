@@ -15,10 +15,19 @@ public class Main {
 
         try {
             session.beginTransaction();
-            Person person = new Person("Test person", 50);
-            Passport passport = new Passport(person, 12345);
-            person.setPassport(passport); // и без этого hibernate сохранил бы человека
-            session.save(person); // сохранение будет каскадировано на паспорт
+
+//            Person person = session.get(Person.class, 4);
+//            System.out.println(person.getPassport().getPassportNumber());
+
+//            Passport passport = session.get(Passport.class, 4);
+//            System.out.println(passport.getPerson().getName());
+
+//            Person person = session.get(Person.class, 4);
+//            person.getPassport().setPassportNumber(77777);
+
+            Person person = session.get(Person.class, 4);
+            session.remove(person);
+
 
 
             session.getTransaction().commit();
